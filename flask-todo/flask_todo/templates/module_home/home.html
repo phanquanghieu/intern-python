@@ -1,0 +1,52 @@
+{% extends 'layout.html' %} {% block title %} Flask Todo {% endblock %} {% block
+container %}
+<div class="mt-5 d-flex justify-content-center align-items-center">
+  <h1>Welcome, {{user.email}}</h1>
+</div>
+<div class="mt-5 d-flex justify-content-center align-items-center">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>description</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+<script type="text/javascript">
+  let token = "{{token}}";
+  sessionStorage.setItem("token", token);
+  let fetchData = async () => {
+    try {
+      let todosRes = await (
+        await fetch("http://localhost:5000/api/v1/todos", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        })
+      ).json();
+      return todosRes.data ?? [];
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  let run = async () => {
+    let todos = await fetchData();
+    let bodyHtml = "";
+    for (let todo of todos) {
+      bodyHtml += `
+        <tr>
+          <td>${todo.name}</td>
+          <td>${todo.description}</td>
+          <td>${todo.status}</td>
+        </tr>
+      `;
+    }
+    document.getElementById("tbody").innerHTML = bodyHtml;
+  };
+  run()
+</script>
+{% endblock %}

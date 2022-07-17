@@ -1,0 +1,54 @@
+{% extends 'index.html' %} {% block title %} Register {% endblock %} {% block
+content %}
+<div class="container">
+  <div class="card shadow-sm m-auto mt-5" style="width: 500px">
+    <div class="card-body p-5">
+      <div class="d-flex justify-content-center fs-1 fw-bolder pb-3">
+        Register
+      </div>
+      <form method="post">
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example1">Email address</label>
+          <input
+            name="email"
+            type="email"
+            id="form2Example1"
+            class="form-control"
+          />
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example2">Password</label>
+          <input
+            name="password"
+            type="password"
+            id="form2Example2"
+            class="form-control"
+          />
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example2">Password Confirm</label>
+          <input
+            name="passwordConfirm"
+            type="password"
+            id="form2Example2"
+            class="form-control"
+          />
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary btn-block mb-4">
+            Register
+          </button>
+        </div>
+        <!-- Register buttons -->
+        <div class="text-center">
+          <p>Have a account? <a href="/login">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
